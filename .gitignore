@@ -12,3 +12,6 @@ npm-debug.log
 yarn-error.log
 .editorconfig
 .styleci.yml
+.project
+.buildpath
+.settings/
