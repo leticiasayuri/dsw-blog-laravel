@@ -1,0 +1,25 @@
+body {
+  min-height: 75rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+}
+
+li { 
+	list-style:none;
+}
+
+.post-font {
+	font-family: serif;
+	text-align: justify;
+	font-size: 1.3rem;
+}
+
+.post-comment {
+	border-left: 1px solid #ccc;
+	padding-left: 1.5rem;
+}
