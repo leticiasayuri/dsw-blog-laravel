@@ -19,3 +19,8 @@ Route::get('/post', function () {
     return view('post');
 });
         
+Route::get('/cadastro', function () {
+    return view('cadastro');
+});
+
+Route::resource('usuarios', 'UsuarioController');

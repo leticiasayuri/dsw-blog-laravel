@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Usuario;
 
 class UsuarioController extends Controller
 {
@@ -23,7 +24,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuarios.create');
     }
 
     /**
@@ -34,7 +35,22 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'senha' =>'required'
+        ]);
+
+        $usuario = new Usuario([
+            'nome' => $request->get('nome'),
+            'email' => $request->get('email'),
+            'senha' => $request->get('senha'),
+            'role' => "normal"
+        ]);
+
+        $usuario->save();
+
+        return redirect('/')->with('success', 'Usuario salvo com sucesso!');
     }
 
     /**
