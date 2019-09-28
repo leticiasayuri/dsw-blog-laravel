@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
     </head>
     <body>
+    	@include('status')
+    	
         @yield('header')
         @yield('content')
         @yield('footer')

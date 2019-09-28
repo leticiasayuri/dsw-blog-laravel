@@ -6,16 +6,7 @@
 
 @section('content')
 <div class="container col-md-8">
-	<div class="col-sm-8 offset-sm-2">
-		@if ($errors->any())
-      		<div class="alert alert-danger">
-        		<ul>
-            		@foreach ($errors->all() as $error)
-              			<li>{{ $error }}</li>
-            		@endforeach
-        		</ul>
-      		</div><br />
-    	@endif		
+	<div class="col-sm-8 offset-sm-2">	
 		<form method="post" action="{{route('usuarios.store')}}">
 			@csrf
 			<div class="form-group">

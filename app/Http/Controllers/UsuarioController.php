@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Usuario;
 
@@ -48,7 +49,12 @@ class UsuarioController extends Controller
             'role' => "normal"
         ]);
 
-        $usuario->save();
+        try {
+            $usuario->save();
+        }
+        catch (Exception $e) {
+            return view("usuarios.create")->with('exception', $e->getMessage());
+        }
 
         return redirect('/')->with('success', 'Usuario salvo com sucesso!');
     }

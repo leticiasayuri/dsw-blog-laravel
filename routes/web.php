@@ -20,7 +20,7 @@ Route::get('/post', function () {
 });
         
 Route::get('/cadastro', function () {
-    return view('cadastro');
+    return view('usuarios.create');
 });
 
 Route::resource('usuarios', 'UsuarioController');
