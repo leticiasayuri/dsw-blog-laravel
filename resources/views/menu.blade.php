@@ -7,8 +7,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="/login">Acessar</a></li>
-            <li class="nav-item"><a class="nav-link" href="/cadastro">Cadastrar-se</a></li>
+        	@if(Auth::user())
+        		<li class="nav-item"><a class="nav-link" href="/logout">Sair</a></li>
+        	@else
+            	<li class="nav-item"><a class="nav-link" href="/login">Acessar</a></li>
+            	<li class="nav-item"><a class="nav-link" href="/cadastro">Cadastrar-se</a></li>
+            @endif
         </ul>
     </div>
 </nav>

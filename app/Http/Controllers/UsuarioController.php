@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Usuario;
 
 class UsuarioController extends Controller
@@ -38,14 +40,14 @@ class UsuarioController extends Controller
     {
         $request->validate([
             'nome' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'senha' =>'required'
         ]);
 
         $usuario = new Usuario([
             'nome' => $request->get('nome'),
             'email' => $request->get('email'),
-            'senha' => $request->get('senha'),
+            'senha' => Hash::make($request->get('senha')),
             'role' => "normal"
         ]);
 
@@ -58,7 +60,23 @@ class UsuarioController extends Controller
 
         return redirect('/')->with('success', 'Usuario salvo com sucesso!');
     }
-
+    
+    public function auth(Request $request) {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'senha'  => 'required'
+        ]);
+                
+        if(Auth::attempt(['email' => $request->post('email'), 'password' => $request->post('senha')]))
+        {
+            return redirect('/')->with('success', 'Usuario autenticado com sucesso!');
+        }
+        else
+        {
+            return view("usuarios.login")->with('exception', 'Email/senha inválidos.');
+        }
+    }
+    
     /**
      * Display the specified resource.
      *

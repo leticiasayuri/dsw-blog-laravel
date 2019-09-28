@@ -23,4 +23,15 @@ Route::get('/cadastro', function () {
     return view('usuarios.create');
 });
 
+Route::get('/login', function () {
+    return view('usuarios.login');
+});
+    
+Route::get('/logout', function () {
+    Auth::logout();
+    return view('index');
+});
+
+Route::post('/login', ['uses' => 'UsuarioController@auth', 'as' => 'usuarios.auth']);
+
 Route::resource('usuarios', 'UsuarioController');
