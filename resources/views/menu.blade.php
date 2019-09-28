@@ -8,6 +8,10 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
         	@if(Auth::user())
+        		@if(Auth::user()->role == "admin")
+        			<li class="nav-item"><a class="nav-link" href="/postar">Nova postagem</a></li>
+        		@endif
+        		
         		<li class="nav-item"><a class="nav-link" href="/logout">Sair</a></li>
         	@else
             	<li class="nav-item"><a class="nav-link" href="/login">Acessar</a></li>
