@@ -20,8 +20,10 @@
 			</div>
 			<div class="form-group">
 				<label for="senha">Senha</label>
-				<input type="password" class="form-control" id="senha" name="senha" placeholder="Password">
+				<input type="password" class="form-control" id="senha" aria-describedby="senhaHelp" name="senha" placeholder="Password">
 			</div>
+			<small id="senhaHelp" class="form-text text-muted">A senha deve ter, no mínimo, 6 caracteres e conter, no mínimo, 1 letra maiúscula, 1 letra minúscula, 1 dígito numérico e 1 caracter especial.</small><br>
+			
 			<button type="submit" class="btn btn-primary">Cadastrar</button>
 		</form>
 	</div>
