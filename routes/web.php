@@ -11,27 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'PostController@index');
 
-Route::get('/post', function () {
-    return view('post');
+Route::middleware('auth')->get('/postar', function () {
+    return view('posts.create');
 });
         
-Route::get('/cadastro', function () {
+Route::get('cadastro', function () {
     return view('usuarios.create');
 });
 
-Route::get('/login', function () {
+Route::get('login', function () {
     return view('usuarios.login');
-});
+})->name('login');
     
-Route::get('/logout', function () {
+Route::get('logout', function () {
     Auth::logout();
-    return view('index');
+    return redirect('/');
 });
 
-Route::post('/login', ['uses' => 'UsuarioController@auth', 'as' => 'usuarios.auth']);
+Route::post('login', ['uses' => 'UsuarioController@auth', 'as' => 'usuarios.auth']);
 
 Route::resource('usuarios', 'UsuarioController');
+Route::resource('posts', 'PostController');

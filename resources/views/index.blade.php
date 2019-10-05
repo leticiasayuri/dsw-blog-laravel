@@ -6,6 +6,6 @@
 
 @section('content')
 <div class="container col-md-8">
-    @include('posts')
+    @include('posts/all')
 </div>
 @stop
