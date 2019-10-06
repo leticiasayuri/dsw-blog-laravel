@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
+use App\Usuario;
 
 class PostController extends Controller
 {
@@ -69,7 +70,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return view('posts.view')->with('id_post', $id);
+        $post = Post::find($id);
+        $usuario = Usuario::find($post->id_autor);
+        return view('posts.view')->with('post', $post)->with('usuario', $usuario);
     }
 
     /**
