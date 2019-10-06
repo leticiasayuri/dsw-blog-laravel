@@ -26,6 +26,13 @@
 			
 			<button type="submit" class="btn btn-primary">Cadastrar</button>
 		</form>
+
+		@if (Session::has('success'))
+			<br>
+			<div class="alert alert-success" role="alert">
+				{{Session::get('success')}}
+			</div>
+		@endif
 	</div>
 </div>
 @stop

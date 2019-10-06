@@ -58,7 +58,7 @@ class UsuarioController extends Controller
             return view("usuarios.create")->with('exception', $e->getMessage());
         }
 
-        return redirect('/')->with('success', 'Usuario salvo com sucesso!');
+        return redirect()->back()->with('success', 'Cadastro realizado com sucesso!');
     }
     
     public function auth(Request $request) {
