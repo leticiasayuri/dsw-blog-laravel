@@ -33,4 +33,12 @@ Route::get('logout', function () {
 Route::post('login', ['uses' => 'UsuarioController@auth', 'as' => 'usuarios.auth']);
 
 Route::resource('usuarios', 'UsuarioController');
+
 Route::resource('posts', 'PostController');
+
+Route::get('/posts/{id}',
+    [
+        'uses' => 'PostController@show',
+        'as' => 'posts.show'
+    ]
+);
