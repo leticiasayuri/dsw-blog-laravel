@@ -21,13 +21,29 @@
 		</div>        
     </div>
     
-    <hr class="col-md-2 offset-md-5"/>
+    <hr id="comentarios" class="col-md-2 offset-md-5"/>
     
     <div class="mt-5">
     	<h2 class="m-0">Comentários</h2>
     	<p class="text-muted mb-4">102 comentários</p>
-    
-    	<ul>
+	
+		@if(Auth::user())
+			<form class="mb-5" data-target="#js-comentarios" method="post" action="{{route('comentarios.store')}}">
+				@csrf
+
+				<input type="hidden" name="id_post" value="{{ $post->id }}"/>
+
+				<div class="form-group">
+					<label for="js-resumo">Escreva um comentário:</label>
+					<textarea class="form-control" id="js-comentario" rows="2" maxlength="128" name="conteudo" required></textarea>
+					<p class="text-muted">Máximo 128 caracteres</p>
+				</div>
+				
+				<input class="btn btn-primary" type="submit" value="Comentar"/>
+			</form>
+		@endif
+
+    	<ul id="js-comentarios">
             <li class="mb-5 post-comment">
                 <p class="m-0"><span class="text-muted">24 setembro 2019</span> Leitor diz:</p>
                 <p class="m-0">Nunc non diam et augue interdum porta. Mauris aliquam, mi sed laoreet vehicula, metus neque vulputate ex, porttitor tristique dui nisl tristique neque.</p>

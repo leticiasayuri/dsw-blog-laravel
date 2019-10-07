@@ -36,6 +36,8 @@ Route::resource('usuarios', 'UsuarioController');
 
 Route::resource('posts', 'PostController');
 
+Route::resource('comentarios', 'ComentarioController');
+
 Route::get('/posts/{id}',
     [
         'uses' => 'PostController@show',
