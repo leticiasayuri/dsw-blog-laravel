@@ -1,0 +1,11 @@
+.quill-post > .ql-toolbar {
+    display: none;
+}
+
+.quill-post-content {
+    border: none !important;
+}
+
+.quill-post-content > .ql-editor {
+    padding: 0;
+}
