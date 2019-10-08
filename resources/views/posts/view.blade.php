@@ -14,7 +14,7 @@
 
 <div class="container col-md-8">
     <div class="mb-5 quill-post">
-    	<p class="text-muted mt-0 mb-4">{{ $post->created_at }} por {{ $usuario->nome }}</p>
+    	<p class="text-muted mt-0 mb-4">{{ $post->created_at }} por {{ $post->autor()->nome }}</p>
 
     	<div id="js-quill-container" class="post-font quill-post-content">
             <!-- Conteúdo da postagem -->
@@ -25,9 +25,9 @@
     
     <div class="mt-5">
     	<h2 class="m-0">Comentários</h2>
-    	<p class="text-muted mb-4">102 comentários</p>
+    	<p class="text-muted mb-4">{{ $post->qtdComentarios() }} comentários</p>
 	
-		@if(Auth::user())
+		@auth
 			<form class="mb-5" data-target="#js-comentarios" method="post" action="{{route('comentarios.store')}}">
 				@csrf
 
@@ -41,9 +41,32 @@
 				
 				<input class="btn btn-primary" type="submit" value="Comentar"/>
 			</form>
-		@endif
+		@endauth
 
     	<ul id="js-comentarios">
+    		@foreach($post->comentarios() as $comentario)
+    			<li class="mb-5 post-comment" id="cometario-{{ $comentario->id }}">
+                    <p class="m-0"><span class="text-muted">{{ $comentario->created_at }}</span> {{ $comentario->autor()->nome }} diz:</p>
+                    <p class="mt-0 mb-2">{{ $comentario->conteudo }}</p>
+                    
+                    <a data-toggle="collapse" href="#reponder-comentario-{{ $comentario->id }}" role="button" aria-expanded="false" aria-controls="reponder-comentario-{{ $comentario->id }}">
+                        Responder
+                  	</a>
+                  	
+                  	<div class="collapse" id="reponder-comentario-{{ $comentario->id }}">
+                  		<form method="post" action="{{route('comentarios.store')}}">
+                  			@csrf
+                  			
+                  			<input type="hidden" name="id_responde" value="{{ $comentario->id }}"/>
+                  			
+                  			<textarea class="form-control mb-2" rows="2" name="conteudo" maxlength="128" required></textarea>
+                  			<input class="btn btn-primary btn-sm" type="submit" value="Enviar resposta"/>
+                  		</form>
+                    </div>
+                </li>
+    		@endforeach
+    	
+    		<!-- 
             <li class="mb-5 post-comment">
                 <p class="m-0"><span class="text-muted">24 setembro 2019</span> Leitor diz:</p>
                 <p class="m-0">Nunc non diam et augue interdum porta. Mauris aliquam, mi sed laoreet vehicula, metus neque vulputate ex, porttitor tristique dui nisl tristique neque.</p>
@@ -154,6 +177,7 @@
               		</form>
                 </div>
             </li>
+             -->
     	</ul>
     </div>
     

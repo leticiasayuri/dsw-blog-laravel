@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
 use App\Comentario;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class ComentarioController extends Controller
 {
@@ -38,7 +38,6 @@ class ComentarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_post' => 'required',
             'conteudo' =>'required|string|max:128'
         ]);
 
@@ -58,7 +57,7 @@ class ComentarioController extends Controller
             return back()->with('exception', $e->getMessage());
         }
 
-        return back()->with('success', 'Comentário enviado! <a href="#comentario-' . $comentario->id . '">Visualizar</a>');
+        return redirect(route('posts.show', ['id' => $id_post]))->with('success', 'Comentário enviado!');
     }
         
     /**

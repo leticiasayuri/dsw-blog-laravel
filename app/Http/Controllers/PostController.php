@@ -71,8 +71,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        $usuario = Usuario::find($post->id_autor);
-        return view('posts.view')->with('post', $post)->with('usuario', $usuario);
+        return view('posts.view')->with('post', $post);
     }
 
     /**
