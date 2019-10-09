@@ -42,3 +42,10 @@ Route::get('/posts/{id}',
         'as' => 'posts.show'
     ]
 );
+
+Route::get('/posts/edit/{id}',
+    [
+        'uses' => 'PostController@edit',
+        'as' => 'posts.edit'
+    ]
+);

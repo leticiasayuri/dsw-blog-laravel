@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="{{ asset('css/normalize.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/quill-custom.css') }}"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
     	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
