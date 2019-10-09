@@ -18,7 +18,11 @@ class Comentario extends Model
         return $this->belongsTo('App\Usuario', 'id_usuario', 'id')->getResults();
     }
     
-    public function repostas() {
-        return $this->hasMany('App\Comentario', 'id_responde', 'id');
+    public function respostas() {
+        return $this->hasMany('App\Comentario', 'id_responde', 'id')->getResults();
+    }
+
+    public function pai() {
+        return $this->belongsTo('App\Comentario', 'id', 'id_responde')->getResults();
     }
 }
