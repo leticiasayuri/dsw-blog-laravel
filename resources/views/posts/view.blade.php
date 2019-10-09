@@ -53,7 +53,11 @@
 						<a data-toggle="collapse" href="#reponder-comentario-{{ $comentario->id }}" role="button" aria-expanded="false" aria-controls="reponder-comentario-{{ $comentario->id }}">
 							Responder
 						</a>
-						
+
+						@if ($comentario->autor()->id == Auth::user()->id)
+							<a class="ml-3 text-danger" onclick="confirmarDeletarComantario(event)" href="{{ route('comentarios.destroy', ['id' => $comentario->id]) }}" role="button">Excluir comentário</a>
+						@endif
+
 						<div class="collapse" id="reponder-comentario-{{ $comentario->id }}">
 							<form method="post" action="{{route('comentarios.store')}}">
 								@csrf
@@ -67,7 +71,7 @@
 						</div>
 
 						<ul>
-							@foreach($comentario->respostas() as $resposta)
+							@foreach($comentario->respostas()->getResults() as $resposta)
 								<li class="mt-3 post-comment">
 									<p class="m-0"><span class="text-muted">{{ $resposta->created_at }}</span> {{ $resposta->autor()->nome }} diz:</p>
 									<p class="mt-0 mb-2">{{ $resposta->conteudo }}</p>
@@ -202,8 +206,10 @@ var POST_CONTENT = <?php echo $post->conteudo ?>;
 <script src="{{ asset('js/posts_view.js') }}"></script>
 @stop
 
-<?php
-	function comentario($usuario, $comentario, $post) {
-
+<script>
+	function confirmarDeletarComantario(event) {
+		if(!confirm('Deseja mesmo excluir o comentário?')) {
+			event.preventDefault();
+		}
 	}
-?>
+</script>

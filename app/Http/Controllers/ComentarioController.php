@@ -102,6 +102,9 @@ class ComentarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comentario = Comentario::find($id);
+        $id_post = $comentario->id_post;
+        Comentario::destroy($id);
+        return redirect(route('posts.show', ['id' => $id_post]))->with('success', 'Comentário removido!');
     }
 }

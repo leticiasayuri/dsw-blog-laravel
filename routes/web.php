@@ -44,3 +44,10 @@ Route::get('/posts/{id}',
         'as' => 'posts.show'
     ]
 );
+
+Route::get('/comentarios/destroy/{id}',
+    [
+        'uses' => 'ComentarioController@destroy',
+        'as' => 'comentarios.destroy'
+    ]
+);
