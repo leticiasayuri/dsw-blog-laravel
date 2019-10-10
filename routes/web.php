@@ -56,3 +56,10 @@ Route::put('/posts/{id}',
         'as' => 'posts.update'
     ]
 );
+
+Route::delete('/posts/{id}',
+    [
+        'uses' => 'PostController@destroy',
+        'as' => 'posts.destroy'
+    ]
+);

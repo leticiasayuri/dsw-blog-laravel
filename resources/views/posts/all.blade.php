@@ -13,8 +13,19 @@
                     <p class="text-muted m-0">{{ date('d/m/Y H:m', strtotime($post->created_at)) }}</p>
 
                     <br>
-                    <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn btn-primary">Editar <i class="material-icons">edit</i></a>
-                    <a href="#" class="btn btn-danger">Excluir <i class="material-icons">delete</i></a>
+
+                    <table>
+                        <tr>
+                            <td><a href="{{ route('posts.destroy', ['id' => $post->id]) }}" class="btn btn-primary">Editar <i class="material-icons">edit</i></a></td>
+                            <td>
+                                <form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger">Excluir <i class="material-icons">delete</i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div><br>
         @endforeach  
