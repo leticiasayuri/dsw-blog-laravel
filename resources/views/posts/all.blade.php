@@ -6,28 +6,30 @@
 @if(Auth::user())
     @if(Auth::user()->role == "admin")
         @foreach($posts as $post)
-            <div class="card">
-                <div class="card-body">
-                    <a href="{{ route('posts.show', ['id' => $post->id]) }}"><h3>{{ $post->titulo }}</h3></a>
-                    <p class="post-font m-0">{{ $post->resumo }}</p>
-                    <p class="text-muted m-0">{{ date('d/m/Y H:m', strtotime($post->created_at)) }}</p>
+            @if($post->id_autor == Auth::user()->id)
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ route('posts.edit', ['id' => $post->id]) }}"><h3>{{ $post->titulo }}</h3></a>
+                        <p class="post-font m-0">{{ $post->resumo }}</p>
+                        <p class="text-muted m-0">{{ date('d/m/Y H:m', strtotime($post->created_at)) }}</p>
 
-                    <br>
+                        <br>
 
-                    <table>
-                        <tr>
-                            <td><a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn btn-primary">Editar <i class="material-icons">edit</i></a></td>
-                            <td>
-                                <form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger">Excluir <i class="material-icons">delete</i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div><br>
+                        <table>
+                            <tr>
+                                <td><a href="{{ route('posts.destroy', ['id' => $post->id]) }}" class="btn btn-primary">Editar <i class="material-icons">edit</i></a></td>
+                                <td>
+                                    <form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger">Excluir <i class="material-icons">delete</i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div><br>
+            @endif
         @endforeach  
     @endif
     @else
