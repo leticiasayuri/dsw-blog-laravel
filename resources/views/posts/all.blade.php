@@ -8,7 +8,7 @@
         @foreach($posts as $post)
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ route('posts.edit', ['id' => $post->id]) }}"><h3>{{ $post->titulo }}</h3></a>
+                    <a href="{{ route('posts.show', ['id' => $post->id]) }}"><h3>{{ $post->titulo }}</h3></a>
                     <p class="post-font m-0">{{ $post->resumo }}</p>
                     <p class="text-muted m-0">{{ date('d/m/Y H:m', strtotime($post->created_at)) }}</p>
 
@@ -16,7 +16,7 @@
 
                     <table>
                         <tr>
-                            <td><a href="{{ route('posts.destroy', ['id' => $post->id]) }}" class="btn btn-primary">Editar <i class="material-icons">edit</i></a></td>
+                            <td><a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn btn-primary">Editar <i class="material-icons">edit</i></a></td>
                             <td>
                                 <form action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="post">
                                     @csrf
