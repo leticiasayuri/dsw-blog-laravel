@@ -51,3 +51,24 @@ Route::get('/comentarios/destroy/{id}',
         'as' => 'comentarios.destroy'
     ]
 );
+
+Route::get('/posts/edit/{id}',
+    [
+        'uses' => 'PostController@edit',
+        'as' => 'posts.edit'
+    ]
+);
+
+Route::put('/posts/{id}',
+    [
+        'uses' => 'PostController@update',
+        'as' => 'posts.update'
+    ]
+);
+
+Route::delete('/posts/{id}',
+    [
+        'uses' => 'PostController@destroy',
+        'as' => 'posts.destroy'
+    ]
+);

@@ -9,7 +9,8 @@
         <ul class="navbar-nav mr-auto">
         	@if(Auth::user())
         		@if(Auth::user()->role == "admin")
-        			<li class="nav-item"><a class="nav-link" href="/postar">Nova postagem</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/postar">Nova postagem</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/update">Editar Perfil</a></li>
         		@endif
         		
         		<li class="nav-item"><a class="nav-link" href="/logout">Sair</a></li>
