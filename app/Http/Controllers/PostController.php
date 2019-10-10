@@ -83,7 +83,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('posts.edit')->with('post', $post);
     }
 
     /**
@@ -95,7 +96,25 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'titulo' => 'required|string|max:100',
+            'resumo' => 'required|string|max:300',
+            'conteudo' =>'required|string|json'
+        ]);
+
+        $post = Post::find($id);
+        $post->titulo = $request->get('titulo');
+        $post->resumo = $request->get('resumo');
+        $post->conteudo = $request->get('conteudo');
+
+        try {
+            $post->update();
+        }
+        catch (Exception $e) {
+            return view("/")->with('exception', $e->getMessage());
+        }
+
+        return redirect("/")->with('success', 'Postagem atualizada!');
     }
 
     /**
@@ -106,6 +125,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect("/")->with('success', 'Postagem excluída!');
     }
 }
