@@ -36,10 +36,19 @@ Route::resource('usuarios', 'UsuarioController');
 
 Route::resource('posts', 'PostController');
 
+Route::resource('comentarios', 'ComentarioController');
+
 Route::get('/posts/{id}',
     [
         'uses' => 'PostController@show',
         'as' => 'posts.show'
+    ]
+);
+
+Route::get('/comentarios/destroy/{id}',
+    [
+        'uses' => 'ComentarioController@destroy',
+        'as' => 'comentarios.destroy'
     ]
 );
 
