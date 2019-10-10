@@ -49,3 +49,10 @@ Route::get('/posts/edit/{id}',
         'as' => 'posts.edit'
     ]
 );
+
+Route::put('/posts/{id}',
+    [
+        'uses' => 'PostController@update',
+        'as' => 'posts.update'
+    ]
+);

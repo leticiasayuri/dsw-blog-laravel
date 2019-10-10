@@ -20,7 +20,8 @@
 	<h2 class="mb-3 mt-5">Nova postagem</h2>
 
 	<form action="{{route('posts.update', ['id' => $post->id])}}" method="post" id="js-post-form">
-		@csrf
+        @method('PUT') 
+        @csrf
 	
         <div class="form-group">
             <label for="js-title">Título da postagem</label>
