@@ -7,17 +7,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-        	@if(Auth::user())
+        	@auth
         		@if(Auth::user()->role == "admin")
                     <li class="nav-item"><a class="nav-link" href="/postar">Nova postagem</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/update">Editar Perfil</a></li>
         		@endif
         		
+        		<li class="nav-item"><a class="nav-link" href="{{ route('usuarios.edit', ['id' => Auth::user()->id]) }}">Editar Perfil</a></li>
         		<li class="nav-item"><a class="nav-link" href="/logout">Sair</a></li>
-        	@else
+        	@endauth
+        	
+        	@guest
             	<li class="nav-item"><a class="nav-link" href="/login">Acessar</a></li>
             	<li class="nav-item"><a class="nav-link" href="/cadastro">Cadastrar-se</a></li>
-            @endif
+            @endguest
         </ul>
     </div>
 </nav>

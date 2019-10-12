@@ -44,7 +44,7 @@
 		@endauth
 
     	<ul id="js-comentarios">
-    		@foreach($post->comentarios() as $comentario)
+    		@foreach($post->comentarios()->getResults() as $comentario)
 				@if (!$comentario->id_responde)
 					<li class="mb-5 post-comment" id="cometario-{{ $comentario->id }}">
 						<p class="m-0"><span class="text-muted">{{ $comentario->created_at }}</span> {{ $comentario->autor()->nome }} diz:</p>

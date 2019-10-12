@@ -4,11 +4,11 @@
 	</div>
 @endif
 
-@if ($errors->any() || isset($exception))
+@if ($errors->any() || isset($exception) || session()->get('exception'))
 	<div class="alert alert-danger mb-0">
 		<ul>
-			@if(isset($exception))
-				<li>{{ $exception }}</li>
+			@if(isset($exception) || session()->get('exception'))
+				<li>{{ $exception ?? session()->get('exception') }}</li>
 			@endif
 			
     		@foreach ($errors->all() as $error)

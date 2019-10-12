@@ -72,3 +72,24 @@ Route::delete('/posts/{id}',
         'as' => 'posts.destroy'
     ]
 );
+
+Route::get('/usuarios/edit/{id}', 
+    [
+        'uses' => 'UsuarioController@edit',
+        'as' => 'usuarios.edit'        
+    ]
+);
+
+Route::put('/usuarios/{id}',
+    [
+        'uses' => 'UsuarioController@update',
+        'as' => 'usuarios.update'
+    ]
+);
+
+Route::delete('/usuarios/{id}',
+    [
+        'uses' => 'UsuarioController@destroy',
+        'as' => 'usuarios.destroy'
+    ]
+);

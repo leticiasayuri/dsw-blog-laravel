@@ -53,8 +53,7 @@ class UsuarioController extends Controller
 
         try {
             $usuario->save();
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return view("usuarios.create")->with('exception', $e->getMessage());
         }
 
@@ -67,12 +66,9 @@ class UsuarioController extends Controller
             'senha'  => 'required'
         ]);
                 
-        if(Auth::attempt(['email' => $request->post('email'), 'password' => $request->post('senha')]))
-        {
+        if(Auth::attempt(['email' => $request->post('email'), 'password' => $request->post('senha')])){
             return redirect('/')->with('success', 'Usuario autenticado com sucesso!');
-        }
-        else
-        {
+        } else {
             return view("usuarios.login")->with('exception', 'Email/senha inválidos.');
         }
     }
@@ -96,7 +92,8 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        return view('usuarios.edit')->with('usuario', $usuario);
     }
 
     /**
@@ -108,7 +105,37 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nome' => 'nullable|string|max:255|min:1',
+            'email' => 'nullable|email|string|max:255|min:3',
+            'senha' =>'nullable|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/'
+        ]);
+
+        $usuario = Usuario::find($id);
+        
+        if ($request->get('nome')) {
+            $usuario->nome = $request->get('nome');
+        }
+        
+        if($request->get('email')) {
+            $usuario->email = $request->get('email');
+        }
+        
+        if($request->get('senha')) {
+            $usuario->senha = Hash::make($request->get('senha'));
+        }
+
+        try {
+            $usuario->update();
+        } catch (Exception $e) {
+            if(strpos(strtolower($e->getMessage()), 'duplicate entry') !== false) {
+                return redirect(route('usuarios.edit', ['id' => $usuario->id]))->with('exception', 'O campo email já está sendo utilizado.');
+            }
+            
+            return redirect(route('usuarios.edit', ['id' => $usuario->id]))->with('exception', $e->getMessage());
+        }
+        
+        return redirect()->back()->with('success', 'Cadastro atualizado com sucesso!');
     }
 
     /**
@@ -119,6 +146,8 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        $usuario->delete();
+        return redirect("/")->with('sucess', 'Cadastro removido');
     }
 }
